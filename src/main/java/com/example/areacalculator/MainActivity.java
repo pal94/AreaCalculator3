@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         length2 = findViewById(R.id.ed_length2);
 
         tv_shapeName = findViewById(R.id.tv_shapeName);
+        tv_result=findViewById(R.id.tv_result);
 
         im_triangle = findViewById(R.id.iv_triangle);
         im_square = findViewById(R.id.iv_square);
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 tv_shapeName.setText("Triangle");
                 shape="Triangle";
+                length1.setVisibility(View.VISIBLE);
+                length2.setVisibility(View.VISIBLE);
             }
         });
 
@@ -73,9 +76,6 @@ public void calculateArea(View view)
     side2=0;
     //String name = tv_shapeName.getText().toString();
     side1 = Float.parseFloat(length1.getText().toString());
-    side2 = Float.parseFloat(length2.getText().toString());
-    tv_result=findViewById(R.id.tv_result);
-
     if(length1.getText().toString().equals(""))
     {
         length1.setError("Please Enter a number");
@@ -88,42 +88,28 @@ public void calculateArea(View view)
     switch(shape)
     {
         case "Triangle":
+            side2 = Float.parseFloat(length2.getText().toString());
             area = (float)0.5*(side1)*(side2);
             tv_result.setText(area+"");
         case "Square":
             area = (side1)*(side1);
-            Log.d("TAG", "Hi");
             tv_result.setText(area+"");
+            Log.d("TAG", "Hi");
         case "Circle":
             area = (float)3.1416*(side1)*(side1);
             tv_result.setText(area+"");
+
     }
-
-    /*if(name =="Triangle")
-    {
-        area = (float)(0.5*(side1)*(side2));
-        //Toast.makeText(MainActivity.this, area.toString(), Toast.LENGTH_LONG).show();
-        tv_result.setText(area+"");
-    }
-
-    if(name =="Square")
-    {
-        area = (float)(side1)*(side1);
-        //Toast.makeText(MainActivity.this, area.toString(), Toast.LENGTH_LONG).show();
-        tv_result.setText(area+"");
-    }
-
-    if(name =="Circle")
-    {
-        area = (float)(3.1416*(side1)*(side2));
-        //Toast.makeText(MainActivity.this, area.toString(), Toast.LENGTH_LONG).show();
-        tv_result.setText(area+"");
-    }*/
-
-
-
-
-
-
 }
+
+    public void clearView(View view){
+        length1.setVisibility(View.VISIBLE);
+        length2.setVisibility(View.VISIBLE);
+        tv_shapeName.setText("Select the Shape");
+        tv_result.setText("");
+        length1.setText("");
+        length2.setText("");
+        shape="none";
+
+    }
 }
